@@ -3,7 +3,7 @@ package com.chunkspiral;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
@@ -20,9 +20,9 @@ public class ChunkSpiralClient implements ClientModInitializer {
         KeyMapping.Category category = KeyMapping.Category.register(
                 Identifier.fromNamespaceAndPath("chunkspiral", "main"));
 
-        openMenuKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        openMenuKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.chunkspiral.menu", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, category));
-        toggleKey = KeyBindingHelper.registerKeyBinding(new KeyMapping(
+        toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.chunkspiral.toggle", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, category));
 
         ClientTickEvents.END_CLIENT_TICK.register(mc -> {

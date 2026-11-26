@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "chunkspiral",
+  "version": "${version}",
+  "name": "Chunk Spiral",
+  "description": "Automatically flies you to the height limit and then spirals outward so every chunk below loads onto your map.",
+  "authors": ["You"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.chunkspiral.ChunkSpiralClient"],
+    "modmenu": ["com.chunkspiral.ModMenuIntegration"]
+  },
+  "depends": {
+    "fabricloader": ">=0.17.0",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

@@ -34,12 +34,12 @@ public class FlyerScreen extends Screen {
 
         StringWidget title = new StringWidget(left, y, total, 12,
                 Component.literal("\u2708 CHUNK SPIRAL \u2708").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD), this.font);
-        title.alignCenter();
+        center(title);
         addRenderableWidget(title);
         y += 14;
 
         status = new StringWidget(left, y, total, 10, statusText(), this.font);
-        status.alignCenter();
+        center(status);
         addRenderableWidget(status);
         y += 16;
 
@@ -109,6 +109,12 @@ public class FlyerScreen extends Screen {
                 .bounds(left, y, total, 20).build());
     }
 
+    private void center(StringWidget w) {
+        int mid = this.width / 2;
+        w.setWidth(this.font.width(w.getMessage()));
+        w.setX(mid - w.getWidth() / 2);
+    }
+
     private static Component modeText(FlyerConfig c) {
         return Component.literal("Mode: ").append(Component.literal(
                 c.mode == FlyerConfig.Mode.CREATIVE ? "Creative flight" : "Elytra + fireworks")
@@ -122,12 +128,12 @@ public class FlyerScreen extends Screen {
     @Override
     public void tick() {
         super.tick();
-        if (status != null) status.setMessage(statusText());
+        if (status != null) { status.setMessage(statusText()); center(status); }
     }
 
     @Override
     public void onClose() {
         FlyerConfig.save();
-        this.minecraft.setScreen(parent);
+        this.minecraft.gui.setScreen(parent);
     }
 }

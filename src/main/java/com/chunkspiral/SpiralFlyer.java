@@ -66,7 +66,7 @@ public final class SpiralFlyer {
     }
 
     private static void msg(LocalPlayer p, String s) {
-        p.displayClientMessage(Component.literal(s), false);
+        p.sendSystemMessage(Component.literal(s));
     }
 
     public static String statusLine() {
@@ -203,8 +203,8 @@ public final class SpiralFlyer {
 
     private static void status(LocalPlayer p, FlyerConfig c) {
         if (c.showStatus && tickCount % 10 == 0) {
-            p.displayClientMessage(Component.literal("\u00a7b\u00a7lChunk Spiral \u00a78| " + statusLine()
-                    + " \u00a78| \u00a7fY " + (int) p.getY()), true);
+            p.sendOverlayMessage(Component.literal("\u00a7b\u00a7lChunk Spiral \u00a78| " + statusLine()
+                    + " \u00a78| \u00a7fY " + (int) p.getY()));
         }
     }
 }

@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 
 public class ChunkSpiralClient implements ClientModInitializer {
     public static KeyMapping openMenuKey;
@@ -21,16 +20,16 @@ public class ChunkSpiralClient implements ClientModInitializer {
                 Identifier.fromNamespaceAndPath("chunkspiral", "main"));
 
         openMenuKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.chunkspiral.menu", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_J, category));
+                "key.chunkspiral.menu", InputConstants.KEY_J, category));
         toggleKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
-                "key.chunkspiral.toggle", InputConstants.Type.KEYSYM, GLFW.GLFW_KEY_K, category));
+                "key.chunkspiral.toggle", InputConstants.KEY_K, category));
 
         ClientTickEvents.END_CLIENT_TICK.register(mc -> {
             while (openMenuKey.consumeClick()) {
-                if (mc.player != null && mc.screen == null) mc.setScreen(new FlyerScreen(null));
+                if (mc.player != null && mc.gui.screen() == null) mc.gui.setScreen(new FlyerScreen(null));
             }
             while (toggleKey.consumeClick()) {
-                if (mc.player != null && mc.screen == null) SpiralFlyer.toggle(mc);
+                if (mc.player != null && mc.gui.screen() == null) SpiralFlyer.toggle(mc);
             }
             SpiralFlyer.tick(mc);
         });
